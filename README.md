@@ -3,10 +3,47 @@ simulating an environment for the AbadIA (The abbey of crime game).
 
 Also included some agents from random to more complex ones.
 
-## Pre-installation
+### how to launch the game engine. 
+
+Clone the game engine project and do the usual things like read the README.md file and then launch the game engine: 
+
+```
+git clone https://github.com/LaAbadIAdelCrimen/VigasocoSDL-AI.git
+
+cd VigasocoSDL-AI/extra/Docker/vnc/
+
+docker build -t vigasoco .
+
+docker run -p 4477:4477 -p 5900:5900 vigasoco
+
+```
+
+## VNC Installation
+We recommend use VNC in Chrome browser extension:
+
+```
+https://chrome.google.com/webstore/detail/vnc%C2%AE-viewer-for-google-ch/iabmpiboiopbgfabjmgeedhcmjenhbla/related?utm_source=chrome-app-launcher-info-dialog
+```
+Connect to localhost:5900
+
+## Installation pyhton3 & Abadia-gym
+
+Clone the abadia-gym project:
+
+```
+git clone https://github.com/LaAbadIAdelCrimen/abadia-gym.git
+```
 
 We recommend use virtualenv in order to have a controlled (and tested/controlled) enviroment. 
 
+```
+apt install virtualenv
+
+apt install python3-pip
+
+cd abadia-gym/
+
+```
 You can create this enviroment with: 
 
 ```
@@ -33,6 +70,19 @@ For install AbadIA-gym just install all the dependencies from the requirements.t
  
 ```
 pip3 install -r requirements.txt 
+
+mkdir -p snapshoots
+
+mkdir -p models
+
+cd models/
+
+wget https://storage.googleapis.com/abadia-data/models/last_model_v6.model
+
+wget https://storage.googleapis.com/abadia-data/models/last_model_v6.model
+
+cd ..
+
 ```
 
 
@@ -45,20 +95,17 @@ import gym_abadia
 env = gym.make('abadia-v0')
 ```
 
-### how to launch the game engine. 
 
-Clone the game engine project and do the usual things like read the README.md file and then launch the game engine: 
 
-```
-./VigasocoSDL abadia -input:libVigasocoFakeInputPlugin.so,FakeInputPlugin  -audio:libVigasocoNULLAudioPlugin.so,NULLAudioPlugin
-```
-or use our not so cool bash shell loop: 
+### How to run the agent v6
+
+run the version 6 agent QTables implementation and a few options to control the enviroment.
 
 ```
-./loopVigasocoSDL.sh
+python3 agentv6_ngdqn.py --episodes=5 --steps=2000 --initmodel=models/last_model_v6.model
 ```
 
-### How to run the agent v4
+### Older versions of the agent
 
 run the version 4 agent QTables implementation and a few options to control the enviroment.
 
@@ -71,9 +118,6 @@ You can run it in a loop:
 ```
 ./loopagentv4.sh
 ```
-
-
-### Older versions of the agent
 
 run the version 3 agent QTables implementation and a few options to control the enviroment.
 
